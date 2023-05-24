@@ -1,5 +1,5 @@
 <template>
-    <v-form v-model="valid">
+    <v-form v-model="valid" @submit.prevent.stop="registration">
         <v-container class="fill-height">
             <v-row
                 class="h-100"
@@ -79,6 +79,7 @@
 
 <script setup>
 import {ref} from "vue";
+import {useAuthStore} from "@/store/modules/auth";
 
 const valid = ref(false);
 const name = ref('');
@@ -112,9 +113,15 @@ const avatarRules = [
     },
 ];
 
-const registeration = () => {
-    // ToDo: Fetch registeration
-    console.lg('registeration')
+const { singUp } = useAuthStore();
+const registration = () => {
+    const userData = {
+        email: email.value,
+        password: password.value,
+        fullName: [name.value, lastName.value].join(' '),
+        avatar: avatar.value.length ? avatar.value[0] : null
+    }
+    singUp(userData);
 }
 
 </script>

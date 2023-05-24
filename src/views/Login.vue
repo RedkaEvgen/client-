@@ -1,5 +1,5 @@
 <template>
-    <v-form v-model="valid">
+    <v-form v-model="valid" @submit.prevent.stop="login">
         <v-container class="h-100">
             <v-row
                 class="h-100"
@@ -51,6 +51,7 @@
 
 <script setup>
 import {ref} from "vue";
+import {useAuthStore} from "@/store/modules/auth";
 
 const valid = ref(false);
 const email = ref('');
@@ -69,9 +70,11 @@ const emailRules = [
     },
 ];
 
+const { singIn } = useAuthStore();
+
 const login = () => {
-    // ToDo: Fetch Login
-    console.lg('Login')
+    const userData = { email: email.value, password: password.value };
+    singIn(userData);
 }
 
 </script>
