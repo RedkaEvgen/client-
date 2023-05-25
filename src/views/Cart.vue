@@ -3,7 +3,7 @@
         <v-container class="fill-height">
            <v-row no-gutters>
                <v-col cols="12" class="mb-5">
-                   <h4 class="text-h4"> Корзина </h4>
+                   <h4 class="text-h4"> Кошик </h4>
                </v-col>
                <template v-if="cartProducts.length">
                    <v-col cols="12">

@@ -35,7 +35,6 @@ export const useAuthStore = defineStore('auth', () => {
 		}
 	}
 
-
 	async function singUp (data) {
 		try{
 			const response = await axios.post('/auth/register', data )

@@ -29,7 +29,7 @@
                     </v-btn>
                 </v-col>
                 <v-col cols="6">
-                    <v-btn variant="outlined" block color="deep-purple-accent-4" to="/product">
+                    <v-btn variant="outlined" block color="deep-purple-accent-4" to="/product/12">
                         Переглянути
                     </v-btn>
                 </v-col>

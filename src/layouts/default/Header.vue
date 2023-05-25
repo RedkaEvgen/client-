@@ -26,7 +26,7 @@
             <v-list density="compact" nav>
                 <v-list-item to="/main" prepend-icon="mdi-store" title="Головна" value="main"></v-list-item>
                 <v-list-item to="/products" prepend-icon="mdi-list-box" title="Всі товари" value="products"></v-list-item>
-                <v-list-item to="/cart" prepend-icon="mdi-cart" value="cart" title="Корзина (1)"></v-list-item>
+                <v-list-item to="/cart" prepend-icon="mdi-cart" value="cart" title="Кошик (1)"></v-list-item>
                 <v-list-item v-if="!userIsAuth" to="/login" prepend-icon="mdi-login-variant" title="Вхід/Регестрація" value="login" ></v-list-item>
                 <v-list-item v-if="userIsAuth" prepend-icon="mdi-login-variant" title="Вийти" value="logout" @click="authStore.logout"></v-list-item>
                 <v-list-item v-if="isAdmin" to="/admin/products" prepend-icon="mdi-pencil-box" title="Адмін Панель" value="admin"></v-list-item>
