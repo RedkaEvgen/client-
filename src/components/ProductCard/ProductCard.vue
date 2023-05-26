@@ -7,7 +7,7 @@
         <v-img
             class="align-end text-white"
             height="200"
-            :src="`${image}skeleton.jpg`"
+            :src="`${image}skeleton.jpeg`"
             type="image/jpg"
             cover
             :alt="title"
@@ -69,7 +69,7 @@ const props = defineProps({
   }
 })
 
-const image = computed(() =>"http:localhost:4444/uploads/products/")
+const image = computed(() =>"http://localhost:4444/uploads/products/")
 const handlerBuy = () => {
 
 }
