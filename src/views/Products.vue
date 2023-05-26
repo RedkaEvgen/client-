@@ -32,7 +32,7 @@
           <v-col cols="12" class="mb-8">
               <h4 class="text-h6 mb-5">Для професіоналів</h4>
               <v-row>
-                  <v-col v-for="item of products" cols="4">
+                  <v-col v-for="item in allProducts" cols="4">
                       <ProductCard
                         :title="item.title"
                         :text="item.text"
@@ -51,5 +51,5 @@
 import ProductCard from "@/components/ProductCard/ProductCard.vue";
 import {useProductsStore} from "@/store/modules/products";
 
-const { products } = useProductsStore()
+const { allProducts } = useProductsStore()
 </script>

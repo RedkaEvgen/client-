@@ -5,6 +5,8 @@ import axios from "@/services/axios";
 export const useProductsStore = defineStore('products', () => {
 	const products = ref([]);
 
+  const allProducts = computed(() => products.value)
+
   async function getProduct(id) {
     try{
       return await axios.get(`/products/${id}`);
@@ -25,7 +27,7 @@ export const useProductsStore = defineStore('products', () => {
   }
 
 	return {
-		products,
+    allProducts,
     getProduct,
     getAllProducts
 	}
