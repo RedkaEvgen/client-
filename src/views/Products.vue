@@ -23,8 +23,13 @@
           <v-col cols="12" class="mb-8">
               <h4 class="text-h6 mb-5">Для маленьких дітей</h4>
               <v-row>
-                  <v-col v-for="item of products" cols="4">
-                      <ProductCard />
+                  <v-col v-for="item of allProducts" cols="4">
+                      <ProductCard
+                        :title="item.title"
+                        :text="item.text"
+                        :price="item.price"
+                        :tags="item.tags"
+                        :imageUrl="item.imageUrl"/>
                   </v-col>
               </v-row>
           </v-col>
