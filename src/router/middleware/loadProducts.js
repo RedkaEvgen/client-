@@ -1,9 +1,9 @@
-import {useAuthStore} from "@/store/modules/auth";
+import {useProductsStore} from "@/store/modules/products";
 
-export default async function loadProducts({ router, next }) {
-  const { isAdmin } = useAuthStore();
+export default async function loadProducts({ next }) {
+  const { getAllProducts } = useProductsStore();
 
-  if(!isAdmin) router.push('/')
+  getAllProducts()
 
 	return next();
 }

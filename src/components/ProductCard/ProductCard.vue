@@ -7,18 +7,20 @@
         <v-img
             class="align-end text-white"
             height="200"
-            src="https://dovidka.biz.ua/wp-content/uploads/2022/08/opys-olivtsya-870x400.jpg"
+            :src="`${image}skeleton.jpg`"
+            type="image/jpg"
             cover
+            :alt="title"
         >
         </v-img>
 
-        <v-card-title>Олівець </v-card-title>
+        <v-card-title> {{ title }} </v-card-title>
         <v-card-subtitle class="pt-4">
-            Ціна: 30 грн
+            Ціна: {{ price }} грн
         </v-card-subtitle>
 
         <v-card-text>
-            <div>Відмінний олівець для школи та офісу</div>
+            <div>{{ text }}</div>
         </v-card-text>
 
         <v-card-actions>
@@ -42,7 +44,32 @@
 
 <script setup>
 
+import {computed} from "vue";
 
+const props = defineProps({
+  title: {
+    type: String,
+    required: true,
+  },
+  text: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: String,
+    required: true,
+  },
+  tags: {
+    type: Array,
+    required: () => [],
+  },
+  imageUrl: {
+    type: String,
+    default: ''
+  }
+})
+
+const image = computed(() =>"http:localhost:4444/uploads/products/")
 const handlerBuy = () => {
 
 }

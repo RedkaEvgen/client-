@@ -7,6 +7,7 @@ export default async function tokenAuth({ next }) {
   const token = getFromLocalStore({ name: 'auth_secure_token' })
   if(token && !userIsAuth) {
     await loginByToken();
+    next()
   }
 
   next()

@@ -5,7 +5,7 @@ import useLocalStore from "@/helpers/useLocalStore";
 import {useAuthStore} from "@/store/modules/auth";
 
 
-export const useCartStore = defineStore('auth', () => {
+export const useCartStore = defineStore('cart', () => {
 	const remoteCart = ref([]);
   const { getFromLocalStore, setToLocal } = useLocalStore();
   const { userIsAuth } = useAuthStore();

@@ -23,7 +23,7 @@
           <v-col cols="12" class="mb-8">
               <h4 class="text-h6 mb-5">Для маленьких дітей</h4>
               <v-row>
-                  <v-col v-for="item of 3" cols="4">
+                  <v-col v-for="item of products" cols="4">
                       <ProductCard />
                   </v-col>
               </v-row>
@@ -32,8 +32,14 @@
           <v-col cols="12" class="mb-8">
               <h4 class="text-h6 mb-5">Для професіоналів</h4>
               <v-row>
-                  <v-col v-for="item of 3" cols="4">
-                      <ProductCard />
+                  <v-col v-for="item of products" cols="4">
+                      <ProductCard
+                        :title="item.title"
+                        :text="item.text"
+                        :price="item.price"
+                        :tags="item.tags"
+                        :imageUrl="item.imageUrl"
+                      />
                   </v-col>
               </v-row>
           </v-col>
@@ -43,4 +49,7 @@
 
 <script setup>
 import ProductCard from "@/components/ProductCard/ProductCard.vue";
+import {useProductsStore} from "@/store/modules/products";
+
+const { products } = useProductsStore()
 </script>

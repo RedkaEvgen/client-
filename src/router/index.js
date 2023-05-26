@@ -3,6 +3,7 @@ import middlewarePipeline from "@/router/middlewarePipeline";
 import tokenAuth from "@/router/middleware/tokenAuth";
 import checkAdmin from "@/router/middleware/checkAdmin";
 import checkAuth from "@/router/middleware/checkAuth";
+import loadProducts from "@/router/middleware/loadProducts";
 
 const routes = [
   {
@@ -23,7 +24,7 @@ const routes = [
         name: 'ProductsPage',
         component: () => import(/* webpackChunkName: "products-page" */ '@/views/Products.vue'),
         meta: {
-          middleware: [tokenAuth]
+          middleware: [tokenAuth, loadProducts]
         },
       },
       {
