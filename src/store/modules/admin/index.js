@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import axios from "axios";
+import axios from "@/services/axios";
 import useLocalStore from "@/helpers/useLocalStore";
 import {computed} from "vue";
 
@@ -8,18 +8,20 @@ export const useAdminStore = defineStore('admin', () => {
   const { getFromLocalStore } = useLocalStore();
   const secureToken = computed(() => getFromLocalStore({name: 'auth_secure_token'}));
   async function createProduct({ data }) {
-    const { file, ...textData } = data;
+    const { img, ...textData } = data;
     const bodyFormData = new FormData();
     bodyFormData.append('data', JSON.stringify(textData));
-    bodyFormData.append( 'image', file[0])
+    bodyFormData.append( 'image', img);
     try {
-      const response = await axios.post('/products', { data },{
+      const response = await axios.post('/products', bodyFormData,{
         headers: {
           Authorization: 'Bearer ' + secureToken.value,
           "Content-Type": 'multipart/form-data'
         }
       })
       console.log("RESPONCE", response)
+
+      //TODO: Return result
 
       return 'Продукт додано';
     } catch (e) {
@@ -55,7 +57,12 @@ export const useAdminStore = defineStore('admin', () => {
       console.log('Помилка змінення продукту');
 
     }
+  }
 
+  return {
+    createProduct,
+    deleteProduct,
+    updateProduct
   }
 })
 

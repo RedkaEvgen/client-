@@ -2,10 +2,10 @@
   <v-form v-model="valid" @submit.prevent="submit">
     <v-container class="fill-height">
       <v-row no-gutters>
-        <v-col cols="12"><h4 class="text-h4 mb-8"> Редагування товару</h4></v-col>
-        <v-col cols="12">
+        <slot name="title"></slot>
+        <v-col offset="1" cols="10">
           <v-row>
-            <v-col cols="10">
+            <v-col cols="12">
               <v-file-input
                 class="mb-5"
                 color="deep-purple-accent-4"
@@ -60,10 +60,8 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 
-import {useRoute} from "vue-router";
-import {onMounted, ref} from "vue";
-import axios from "axios";
 
 const props = defineProps({
   title: {
@@ -82,8 +80,9 @@ const props = defineProps({
     type: Array,
     default: () => []
   }
-})
-const route = useRoute()
+});
+
+const emit = defineEmits(['formSubmit']);
 
 const valid = ref(false);
 const title = ref(props.title);
@@ -104,10 +103,12 @@ const submit = () => {
   const data = {
     title: title.value,
     text: text.value,
-    price: price.value,
+    price: Number(price.value),
     tags: tags.value,
     img: img.value[0] || []
   }
+
+  emit('formSubmit', data);
 }
 </script>
 

@@ -72,6 +72,11 @@ const routes = [
             name: 'AdminProduct',
             component: () => import(/* webpackChunkName: "admin-product" */ '@/views/AdminProduct.vue'),
           },
+          {
+            path: 'products/create',
+            name: 'AdminProductCreate',
+            component: () => import(/* webpackChunkName: "admin-product" */ '@/views/AdminCreateProduct.vue'),
+          },
         ]
       }
     ],

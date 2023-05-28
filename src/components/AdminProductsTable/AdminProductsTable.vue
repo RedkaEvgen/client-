@@ -1,7 +1,7 @@
 <template>
     <v-row no-gutters>
         <v-col cols="12" class="mb-4">
-            <v-table fixed-header>
+            <v-table class="mb-5" fixed-header>
                 <thead>
                 <tr>
                     <th></th>
@@ -37,6 +37,7 @@
                 </tbody>
             </v-table>
         </v-col>
+        <v-col cols="12"> <v-btn color="success" to="products/create"> Створити новий продукт </v-btn> </v-col>
     </v-row>
 </template>
 

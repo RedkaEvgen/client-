@@ -1,8 +1,11 @@
 <template>
-  <EditProductForm @formSubmit="submit">
+  <ProductForm @formSubmit="submit">
+    <template #title>
+      <v-col offset="1" cols="10"><h4 class="text-h4 mb-8"> Редагування товару</h4></v-col>
+    </template>
     <template #buttons>
-      <v-col cols="12"  class="mt-3">
-        <v-btn class="mr-10" variant="elevated" color="success" type="submit" >
+      <v-col offset="1" cols="10"  class="mt-3">
+        <v-btn class="mr-10" variant="elevated" color="success" type="submit">
           Зберегти
         </v-btn>
         <v-btn variant="outlined" color="red">
@@ -10,11 +13,11 @@
         </v-btn>
       </v-col>
     </template>
-  </EditProductForm>
+  </ProductForm>
 </template>
 
 <script setup>
-import EditProductForm from "@/components/EditProductForm/EditProductForm.vue";
+import ProductForm from "@/components/ProductForm/ProductForm.vue";
 import {onMounted, ref} from "vue";
 import {useProductsStore} from "@/store/modules/products";
 import {useRoute} from "vue-router";
@@ -31,8 +34,8 @@ onMounted(async () => {
   console.log('ProductData', productData)
 })
 
-const submit = () => {
-
+const submit = (data) => {
+  console.log("CHANGE PRODUCT", data);
 }
 
 </script>
