@@ -19,7 +19,6 @@ export const useAdminStore = defineStore('admin', () => {
           "Content-Type": 'multipart/form-data'
         }
       })
-      console.log("RESPONCE", response)
 
       //TODO: Return result
 
