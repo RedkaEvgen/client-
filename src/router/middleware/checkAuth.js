@@ -1,11 +1,11 @@
 import {useAuthStore} from "@/store/modules/auth";
 
-export default async function checkAuth({ router, next }) {
+export default function checkAuth({ next }) {
   const { userIsAuth } = useAuthStore();
 
   if(userIsAuth) {
-    router.push({ name: 'Main' });
+    next({ name: 'Main' });
   }
 
-  return next();
+  next();
 }

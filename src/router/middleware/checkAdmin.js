@@ -1,8 +1,8 @@
 import {useAuthStore} from "@/store/modules/auth";
 
-export default async function checkAdmin({ router, next }) {
+export default async function checkAdmin({ next }) {
   // const { isAdmin } = useAuthStore();
 
-  // if(!isAdmin) router.push('/');
-	return next();
+  // if(!isAdmin) next('/main');
+  next();
 }

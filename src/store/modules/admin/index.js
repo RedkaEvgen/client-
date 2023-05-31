@@ -11,7 +11,7 @@ export const useAdminStore = defineStore('admin', () => {
     const { img, ...textData } = data;
     const bodyFormData = new FormData();
     bodyFormData.append('data', JSON.stringify(textData));
-    bodyFormData.append( 'image', img);
+    if(img) bodyFormData.append( 'image', img);
     try {
       const response = await axios.post('/products', bodyFormData,{
         headers: {
@@ -20,9 +20,7 @@ export const useAdminStore = defineStore('admin', () => {
         }
       })
 
-      //TODO: Return result
-
-      return 'Продукт додано';
+      return response;
     } catch (e) {
       console.log('Помилка створення продукту')
     }
@@ -30,12 +28,11 @@ export const useAdminStore = defineStore('admin', () => {
 
   async function deleteProduct ({ id }) {
     try {
-      const response = await axios.patch(`/products/${id}`, {}, {
+      await axios.delete(`/products/${id}`, {
         headers: {
           Authorization: 'Bearer ' + secureToken.value
         }
-      })
-      console.log("Видалено успішно", response);
+      });
       return 'Видалено'
     } catch (e) {
       console.log('Помилка видалення продукту')
@@ -44,10 +41,15 @@ export const useAdminStore = defineStore('admin', () => {
 
   async function updateProduct ({ data }) {
     try {
-      const {id} = data;
-      const response = await axios.patch(`/products/${id}`, data,{
+      console.log('Data', data)
+      const { img, ...textData } = data;
+      const bodyFormData = new FormData();
+      bodyFormData.append('data', JSON.stringify(textData));
+      if(img) bodyFormData.append( 'image', img);
+      const response = await axios.post(`/products/${data._id}`, bodyFormData,{
         headers: {
-          Authorization: 'Bearer ' + secureToken.value
+          Authorization: 'Bearer ' + secureToken.value,
+          "Content-Type": 'multipart/form-data'
         }
       })
       console.log("Зміненно успішно", response);

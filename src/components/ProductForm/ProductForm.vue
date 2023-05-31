@@ -6,6 +6,7 @@
         <v-col offset="1" cols="10">
           <v-row>
             <v-col cols="12">
+              <v-img v-if="imageUrl" :src="imageUrl" class="mb-5" aspect-ratio="4/3" height="300"/>
               <v-file-input
                 class="mb-5"
                 color="deep-purple-accent-4"
@@ -60,7 +61,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import {computed, ref} from "vue";
 
 
 const props = defineProps({
@@ -79,6 +80,10 @@ const props = defineProps({
   tags: {
     type: Array,
     default: () => []
+  },
+  imageUrl: {
+    type: String,
+    default: ''
   }
 });
 
@@ -90,6 +95,8 @@ const price = ref(props.price);
 const text = ref(props.text);
 const tags = ref(props.tags);
 
+const formIsValid = computed(() => title.value && price.value && price.value && text.value && tags.value.length);
+
 const img = ref([])
 const imgRules = [
   value => {
@@ -98,7 +105,7 @@ const imgRules = [
 ];
 
 const submit = () => {
-  if(!valid.value) return;
+  if(!valid.value && formIsValid.value) return;
 
   const data = {
     title: title.value,

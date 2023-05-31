@@ -58,24 +58,30 @@ const routes = [
       {
         path: 'admin/',
         component: () => import('@/layouts/default/Admin.vue'),
-        meta: {
-          middleware: [tokenAuth, checkAdmin]
-        },
         children: [
           {
             path: 'products',
             name: 'AdminProducts',
             component: () => import(/* webpackChunkName: "admin-products" */ '@/views/AdminProducts.vue'),
+            meta: {
+              middleware: [tokenAuth, checkAdmin, loadProducts]
+            },
           },
           {
             path: 'products/:id',
             name: 'AdminProduct',
             component: () => import(/* webpackChunkName: "admin-product" */ '@/views/AdminProduct.vue'),
+            meta: {
+              middleware: [tokenAuth, checkAdmin]
+            },
           },
           {
             path: 'products/create',
             name: 'AdminProductCreate',
             component: () => import(/* webpackChunkName: "admin-product" */ '@/views/AdminCreateProduct.vue'),
+            meta: {
+              middleware: [tokenAuth, checkAdmin]
+            },
           },
         ]
       }

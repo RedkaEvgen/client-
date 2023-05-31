@@ -16,24 +16,26 @@
 <script setup>
 import ProductForm from "@/components/ProductForm/ProductForm.vue";
 import {useProductsStore} from "@/store/modules/products";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {ref} from "vue";
 import {useAdminStore} from "@/store/modules/admin";
 
 const route = useRoute();
-const { getProduct } = useProductsStore();
+const router = useRouter();
+const { getProduct, getAllProducts } = useProductsStore();
 const { createProduct } = useAdminStore();
 
 
 const productData = ref(null);
 
 
-const submit = (data) => {
+const submit = async (data) => {
   console.log("CREATE PRODUCT", data);
-  createProduct({ data })
-  // push new Product
-  // get new Products
-  // go to products -
+  await createProduct({ data })
+
+  await getAllProducts();
+
+  await router.push({ name: 'AdminProducts' })
 };
 </script>
 

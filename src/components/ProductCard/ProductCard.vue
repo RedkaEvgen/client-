@@ -1,8 +1,9 @@
 <template>
     <v-card
-        class="mx-auto pa-2"
+        class="mx-auto d-flex flex-column pa-2"
         max-width="400"
         to="/product/12"
+        height="100%"
     >
         <v-img
             class="align-end text-white"
@@ -14,12 +15,12 @@
         >
         </v-img>
 
-        <v-card-title> {{ title }} </v-card-title>
-        <v-card-subtitle class="pt-4">
+        <v-card-title class="flex-grow-1"> {{ title }} </v-card-title>
+        <v-card-subtitle class="flex-grow-1 pt-4">
             Ціна: {{ price }} грн
         </v-card-subtitle>
 
-        <v-card-text>
+        <v-card-text class="flex-grow-1">
             <div>{{ text }}</div>
         </v-card-text>
 
@@ -31,7 +32,7 @@
                     </v-btn>
                 </v-col>
                 <v-col cols="6">
-                    <v-btn variant="outlined" block color="deep-purple-accent-4" to="/product/12">
+                    <v-btn variant="outlined" block color="deep-purple-accent-4" :to="`/product/${id}`">
                         Переглянути
                     </v-btn>
                 </v-col>
@@ -47,6 +48,10 @@
 import {computed} from "vue";
 
 const props = defineProps({
+  id: {
+    type: [String, Number],
+    required: true
+  },
   title: {
     type: String,
     required: true,
