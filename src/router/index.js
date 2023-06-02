@@ -16,7 +16,7 @@ const routes = [
         name: 'Main',
         component: () => import(/* webpackChunkName: "main" */ '@/views/Main.vue'),
         meta: {
-          middleware: [tokenAuth]
+          middleware: [tokenAuth, loadProducts]
         },
       },
       {
@@ -32,7 +32,7 @@ const routes = [
         name: 'ProductPage',
         component: () => import(/* webpackChunkName: "product-page" */ '@/views/Product.vue'),
         meta: {
-          middleware: [tokenAuth]
+          middleware: [tokenAuth, loadProducts]
         },
       },
       {
@@ -54,6 +54,9 @@ const routes = [
         path: 'cart',
         name: 'CartPage',
         component: () => import(/* webpackChunkName: "cart-page" */ '@/views/Cart.vue'),
+        meta: {
+          middleware: [tokenAuth, loadProducts]
+        },
       },
       {
         path: 'admin/',

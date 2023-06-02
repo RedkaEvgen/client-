@@ -29,7 +29,7 @@
           ></v-select>
         </div>
         <div>
-          <v-btn width="250" variant="elevated" color="success" @click="buy">
+          <v-btn width="250" variant="elevated" color="success" @click="handlerBuy">
             Купити
           </v-btn>
         </div>
@@ -51,19 +51,28 @@ import {useRoute} from "vue-router";
 import {useProductsStore} from "@/store/modules/products";
 import ProductGroupByTag from "@/components/ProductGroupByTag/ProductGroupByTag.vue";
 import {storeToRefs} from "pinia";
+import {useCartStore} from "@/store/modules/cart";
 
 const route = useRoute();
 
 const count = ref(1);
 
-const buy = () => {
-  console.log('Купив', route.params.id)
-}
 const productsStore = useProductsStore()
 const {getProduct} = productsStore;
 const { allProducts } = storeToRefs(productsStore)
 
 const productData = ref(null);
+
+
+const  { addToCart }  = useCartStore()
+const handlerBuy = async () => {
+  try {
+    const id = productData.value._id;
+    await addToCart({id, count: count.value})
+  } catch (e) {
+    console.error('Помилка додавання товару')
+  }
+}
 
 onMounted(async () => {
   const id = route.params.id;

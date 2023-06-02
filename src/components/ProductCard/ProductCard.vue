@@ -2,15 +2,15 @@
     <v-card
         class="mx-auto d-flex flex-column pa-2"
         max-width="400"
-        to="/product/12"
+        :to="`/product/${id}`"
         height="100%"
     >
         <v-img
             class="align-end text-white"
-            height="200"
+            height="200px"
             :src="image"
             type="image/jpg"
-            cover
+            contain
             :alt="title"
         >
         </v-img>
@@ -21,13 +21,13 @@
         </v-card-subtitle>
 
         <v-card-text class="flex-grow-1">
-            <div>{{ text }}</div>
+            <div class="text-truncate">{{ text }}</div>
         </v-card-text>
 
         <v-card-actions>
             <v-row>
                 <v-col cols="6">
-                    <v-btn variant="elevated" block color="success" @click="handlerBuy">
+                    <v-btn variant="elevated" type="button" block color="success" @click.prevent.stop="handlerBuy">
                         Купити
                     </v-btn>
                 </v-col>
@@ -46,6 +46,7 @@
 <script setup>
 
 import {computed} from "vue";
+import {useCartStore} from "@/store/modules/cart";
 
 const props = defineProps({
   id: {
@@ -75,9 +76,22 @@ const props = defineProps({
 })
 
 const image = computed(() =>props.imageUrl || "http://localhost:4444/uploads/products/skeleton.jpeg")
-const handlerBuy = () => {
 
+const  { addToCart }  = useCartStore()
+const handlerBuy = async () => {
+  try {
+    const id = props.id;
+    await addToCart({id})
+  } catch (e) {
+    console.error('Помилка додавання товару')
+  }
 }
+
+// Додавання товару
+// Delete product
+// Change Quality
+
+
 </script>
 
 <style scoped>

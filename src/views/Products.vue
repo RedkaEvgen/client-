@@ -25,7 +25,6 @@
 </template>
 
 <script setup>
-import ProductCard from "@/components/ProductCard/ProductCard.vue";
 import {useProductsStore} from "@/store/modules/products";
 import ProductGroupByTag from "@/components/ProductGroupByTag/ProductGroupByTag.vue";
 

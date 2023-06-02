@@ -33,12 +33,12 @@
                     :key="item.name"
                 >
                     <td> {{ index + 1 }}. </td>
-                    <td>{{ item.name }}</td>
+                    <td>{{ item.title }}</td>
                     <td>{{ item.count }}</td>
                     <td>{{ item.price }}</td>
                     <td class="text-right">{{ totalPrice(item.price, item.count) }}</td>
                     <td>
-                        <v-btn icon="mdi-delete" variant="text" class="text-red" title="Delete">
+                        <v-btn icon="mdi-delete" variant="text" class="text-red" title="Delete" @click="deleteHandler(item._id)">
                         </v-btn>
                     </td>
                 </tr>
@@ -49,15 +49,23 @@
 </template>
 <script setup>
 
+import {useCartStore} from "@/store/modules/cart";
+
 const props = defineProps({
     products: {
         type: Array,
         required: true
     }
-})
+});
+
+const { deleteFromCart } = useCartStore()
 
 const totalPrice = ( price, count ) => {
-    return (parseInt(price.match(/\d+/)) * count) + ' грн'
+    return (parseInt(price)) * count + ' грн'
+}
+
+const deleteHandler = (id) => {
+  deleteFromCart({ id })
 }
 
 </script>

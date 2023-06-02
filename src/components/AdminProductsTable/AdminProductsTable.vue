@@ -25,9 +25,10 @@
                     v-for="(item, index) in allProducts"
                     :key="item.name"
                     class="mb-3 py-2"
+
                 >
                     <td> {{ index + 1 }}.</td>
-                    <td> <v-img :src="item.imageUrl" class="py-1" height="80px" cover aspect-ratio="16/9"/> </td>
+                    <td class="py-4" > <v-img :src="item.imageUrl" height="100%" cover aspect-ratio="16/9"/> </td>
                     <td>{{ item.title }}</td>
                     <td>{{ item.price }} грн</td>
                     <td class="text-center">

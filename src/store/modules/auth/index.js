@@ -48,12 +48,14 @@ export const useAuthStore = defineStore('auth', () => {
 	}
   async function loginByToken() {
     try {
-      const response = await axios.get('/auth/me', {
-        headers: {
-          Authorization: 'Bearer ' + secureToken.value
-        }});
+      if(secureToken.value) {
+        const response = await axios.get('/auth/me', {
+          headers: {
+            Authorization: 'Bearer ' + secureToken.value
+          }});
+        state.userData = response.data;
+      }
 
-      state.userData = response.data;
     } catch(e) {
       console.error('Помилка Авторизації')
     }

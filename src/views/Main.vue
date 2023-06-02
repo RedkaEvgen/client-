@@ -22,31 +22,18 @@
         </swiper>
     </div>
 
-
     <v-container>
-        <v-row no-gutters>
-            <v-col cols="12">
-                <h4 class="text-h6 mb-5">Топ</h4>
-                <v-row>
-                    <v-col v-for="item of 3" cols="4">
-                        <ProductCard />
-                    </v-col>
-                </v-row>
-            </v-col>
-        </v-row>
-    </v-container>
+      <ProductGroupByTag
+        title="ТОП продажів"
+        :products="allProducts"
+        tag="home"
+      />
 
-    <v-container>
-        <v-row no-gutters>
-            <v-col cols="12">
-                <h4 class="text-h6 mb-5">Сезонні знижки</h4>
-                <v-row>
-                    <v-col v-for="item of 3" cols="4">
-                        <ProductCard />
-                    </v-col>
-                </v-row>
-            </v-col>
-        </v-row>
+      <ProductGroupByTag
+        title="Сезонні знижки"
+        :products="allProducts"
+        tag="office"
+      />
     </v-container>
 
 </template>
@@ -57,31 +44,36 @@ import { Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import ProductCard from "@/components/ProductCard/ProductCard.vue";
+import ProductGroupByTag from "@/components/ProductGroupByTag/ProductGroupByTag.vue";
 
 const modules = [Navigation];
 
+import {useProductsStore} from "@/store/modules/products";
+
 const banners = [
-    {
-        id: 1,
-        src: 'https://klike.net/uploads/posts/2022-12/1672124005_3-12.jpg',
-    },
-    {
-        id: 2,
-        src: 'https://klike.net/uploads/posts/2022-12/1672123930_3-27.jpg',
-    },
-    {
-        id: 3,
-        src: 'https://klike.net/uploads/posts/2022-12/1672124021_3-20.jpg',
-    },
-    {
-        id: 4,
-        src: 'https://klike.net/uploads/posts/2022-12/1672124010_3-19.jpg',
-    },
-    {
-        id: 5,
-        src: 'https://klike.net/uploads/posts/2022-12/1672123980_3-31.jpg',
-    }
+  {
+    id: 1,
+    src: 'https://klike.net/uploads/posts/2022-12/1672124005_3-12.jpg',
+  },
+  {
+    id: 2,
+    src: 'https://klike.net/uploads/posts/2022-12/1672123930_3-27.jpg',
+  },
+  {
+    id: 3,
+    src: 'https://klike.net/uploads/posts/2022-12/1672124021_3-20.jpg',
+  },
+  {
+    id: 4,
+    src: 'https://klike.net/uploads/posts/2022-12/1672124010_3-19.jpg',
+  },
+  {
+    id: 5,
+    src: 'https://klike.net/uploads/posts/2022-12/1672123980_3-31.jpg',
+  }
 ]
+
+const {allProducts} = useProductsStore()
 </script>
 
 <style scoped>

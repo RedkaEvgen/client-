@@ -2,7 +2,7 @@
     <v-col cols="12" className="mb-8">
       <h4 className="text-h6 pl-3 mb-5">{{ tagTitle }}</h4>
       <v-row>
-        <v-col v-for="item of productsByTag" cols="4">
+        <v-col v-for="item of productsByTag.slice(0, 3)" cols="4">
           <ProductCard
             :id="item._id"
             :title="item.title"

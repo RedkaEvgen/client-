@@ -5,9 +5,9 @@
                <v-col cols="12" class="mb-5">
                    <h4 class="text-h4"> Кошик </h4>
                </v-col>
-               <template v-if="cartProducts.length">
+               <template v-if="cartItems.length">
                    <v-col cols="12">
-                       <CartOrderTable :products="cartProducts"/>
+                       <CartOrderTable :products="cartItems"/>
                    </v-col>
                    <v-col cols="12 mb-10">
                        <CartOrderDelivery />
@@ -28,22 +28,33 @@
 import CartOrderTable from "@/components/CartOrderTable/CartOrderTable.vue";
 import CartOrderDelivery from "@/components/CartOrderDelivery/CardOrderDelivery.vue";
 import EmptyCart from "@/components/EmptyCart/EmptyCart.vue";
-import {onMounted} from "vue";
-import axios from "axios";
+import {computed} from "vue";
+import {useProductsStore} from "@/store/modules/products";
+import {useAuthStore} from "@/store/modules/auth";
+import {storeToRefs} from "pinia";
 
-const cartProducts = [
-    {
-        name: 'Олівець',
-        price: '30 грн',
-        count: 4
+const productStore = useProductsStore();
+const { allProducts } = storeToRefs(productStore)
+
+const userStore = useAuthStore();
+const { user } = storeToRefs(userStore);
+
+const userCartProducts = computed(() => Object.values(user.value.cart).reduce((acc, el) => {
+
+  acc[el.productId] = el;
+
+  return acc
+}, { }) || [])
+
+
+const cartItems = computed(() =>
+  allProducts.value.reduce((acc, el ) => {
+    if(Object.keys(userCartProducts.value).includes(el._id) ) {
+      acc.push({ ...el, count: userCartProducts.value[el._id].count })
     }
-]
 
-onMounted(async () => {
-    // TODO Fetch to cart
+    return acc
+  }, [])
+)
 
-    const products = await axios.get('http://localhost:4444/products');
-
-    console.log('Products:', products)
-})
 </script>
